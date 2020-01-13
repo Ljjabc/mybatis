@@ -46,6 +46,7 @@ public @interface SelectKey {
    *
    * @return an SQL for retrieving a key value
    */
+  // sql语句
   String[] statement();
 
   /**
@@ -73,6 +74,7 @@ public @interface SelectKey {
    *
    * @return {@code true} if execute before; {@code false} if otherwise
    */
+  // 是否执行sql之前执行
   boolean before();
 
   /**
@@ -80,6 +82,7 @@ public @interface SelectKey {
    *
    * @return the key value type
    */
+  // 返回类型
   Class<?> resultType();
 
   /**
@@ -87,5 +90,6 @@ public @interface SelectKey {
    *
    * @return the statement type
    */
+  // statementType
   StatementType statementType() default StatementType.PREPARED;
 }

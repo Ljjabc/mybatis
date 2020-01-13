@@ -31,16 +31,24 @@ import org.apache.ibatis.session.Configuration;
 /**
  * @author Clinton Begin
  */
+// 主要记录配置信息
 public final class MappedStatement {
-
+  // mapped路径
   private String resource;
+  // Configuration
   private Configuration configuration;
+  // namespace+method
   private String id;
+
   private Integer fetchSize;
+  // 超时时间
   private Integer timeout;
+  // 操作SQL的对象的类型
   private StatementType statementType;
   private ResultSetType resultSetType;
+  // sql语句
   private SqlSource sqlSource;
+  // 缓存
   private Cache cache;
   private ParameterMap parameterMap;
   private List<ResultMap> resultMaps;

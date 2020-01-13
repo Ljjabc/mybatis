@@ -126,7 +126,9 @@ public class MapperAnnotationBuilder {
     String resource = type.toString();
     // 判断是否加载过
     if (!configuration.isResourceLoaded(resource)) {
+      // 加载xml
       loadXmlResource();
+      // 添加loadedResources（已加载）
       configuration.addLoadedResource(resource);
       assistant.setCurrentNamespace(type.getName());
       parseCache();
@@ -311,11 +313,13 @@ public class MapperAnnotationBuilder {
     SqlSource sqlSource = getSqlSourceFromAnnotations(method, parameterTypeClass, languageDriver);
     if (sqlSource != null) {
       Options options = method.getAnnotation(Options.class);
+
       final String mappedStatementId = type.getName() + "." + method.getName();
       Integer fetchSize = null;
       Integer timeout = null;
       StatementType statementType = StatementType.PREPARED;
       ResultSetType resultSetType = configuration.getDefaultResultSetType();
+      // sql的类型 select,insert,update,delete
       SqlCommandType sqlCommandType = getSqlCommandType(method);
       boolean isSelect = sqlCommandType == SqlCommandType.SELECT;
       boolean flushCache = !isSelect;
@@ -324,6 +328,7 @@ public class MapperAnnotationBuilder {
       KeyGenerator keyGenerator;
       String keyProperty = null;
       String keyColumn = null;
+      // 添加或更新语句
       if (SqlCommandType.INSERT.equals(sqlCommandType) || SqlCommandType.UPDATE.equals(sqlCommandType)) {
         // first check for SelectKey annotation - that overrides everything else
         SelectKey selectKey = method.getAnnotation(SelectKey.class);
